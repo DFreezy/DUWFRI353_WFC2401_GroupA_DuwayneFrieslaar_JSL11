@@ -1,6 +1,7 @@
 // TASK: import helper functions from utils
+import taskFunctions from 'JSL_Portfolio_Piece_StudentNo_Classcode_Group_Name-Surname_JSL11-main\.utils\taskFunctions.js';
 // TASK: import initialData
-
+import initialData from 'JSL_Portfolio_Piece_StudentNo_Classcode_Group_Name-Surname_JSL11-main\initialData.js'
 
 /*************************************************************************************************************************************************
  * FIX BUGS!!!
@@ -18,8 +19,40 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
+  "side-bar": document.querySelector(".side-bar"),
+  "boards-nav-links-div": document.querySelector(".boards-nav-links-div"),
+  "side-bar-bottom": document.querySelector(".side-bar-bottom"),
+  "hide-side-bar-div": document.querySelector(".hide-side-bar-div"),
+  "sticky-header": document.querySelector(".sticky-header"),
+  "header-name-div": document.querySelector(".header-name-div"),
+  "header-board-name": document.querySelector(".header-board-name"),
+  "dropdownBtn": document.querySelector(".dropdownBtn"),
+  "icon-chevron-down": document.querySelector(".icon-chevron-down"),
+  "primary-btn": document.querySelector(".primary-btn"),
+  "edit-btn": document.querySelector(".edit-btn"),
+  "editBtnsDiv": document.querySelector(".editBtnsDiv"),
+  "editBtns": document.querySelector(".editBtns"),
+  "container": document.querySelector(".container"),
+  "card-column-main": document.querySelector(".card-column-main"),
+  "column-div": document.querySelectorAll(".column-div"),
+  "column-head-div": document.querySelectorAll(".column-head-div"),
+  "dot": document.querySelectorAll(".dot"),
+  "columnHeader": document.querySelectorAll(".columnHeader"),
+  "tasks-container": document.querySelectorAll(".tasks-container"),
+  "modal-window": document.querySelector(".modal-window"),
+  "modal-title": document.querySelector(".modal-title"),
+  "input-div": document.querySelectorAll(".input-div"),
+  "label-modal-window": document.querySelectorAll(".label-modal-window"),
+  "modal-input": document.querySelectorAll(".modal-input"),
+  "button-group": document.querySelectorAll(".button-group"),
+  "submit-btn": document.querySelectorAll(".submit-btn"),
+  "edit-task-modal-window": document.querySelector(".edit-task-modal-window"),
+  "edit-task-form": document.querySelector(".edit-task-form"),
+  "edit-task-div": document.querySelectorAll(".edit-task-div"),
+  "task-title-input": document.querySelectorAll(".task-title-input"),
+  "edit-btn": document.querySelectorAll(".edit-btn"),
+};
 
-}
 
 let activeBoard = ""
 
@@ -31,7 +64,7 @@ function fetchAndDisplayBoardsAndTasks() {
   displayBoards(boards);
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
-    activeBoard = localStorageBoard ? localStorageBoard ;  boards[0]; 
+    activeBoard = localStorageBoard ? localStorageBoard :  boards[0]; 
     elements.headerBoardName.textContent = activeBoard
     styleActiveBoard(activeBoard)
     refreshTasksUI();
@@ -47,13 +80,13 @@ function displayBoards(boards) {
     const boardElement = document.createElement("button");
     boardElement.textContent = board;
     boardElement.classList.add("board-btn");
-    boardElement.click()  { 
+    boardElement.addEventListener('click', function()  { 
       elements.headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board //assigns active board
       localStorage.setItem("activeBoard", JSON.stringify(activeBoard))
       styleActiveBoard(activeBoard)
-    };
+    });
     boardsContainer.appendChild(boardElement);
   });
 
@@ -83,16 +116,16 @@ function filterAndDisplayTasksByBoard(boardName) {
       taskElement.classList.add("task-div");
       taskElement.textContent = task.title;
       taskElement.setAttribute('data-task-id', task.id);
-
+    }),
       // Listen for a click event on each task and open a modal
-      taskElement.click() => { 
+      taskElement.addEventListener('click', function() { 
         openEditTaskModal(task);
-      });
+      }),
 
       tasksContainer.appendChild(taskElement);
-    });
-  });
-}
+    })
+  };
+
 
 
 function refreshTasksUI() {
@@ -142,7 +175,7 @@ function addTaskToUI(task) {
 function setupEventListeners() {
   // Cancel editing task event listener
   const cancelEditBtn = document.getElementById('cancel-edit-btn');
-  cancelEditBtn.click() => toggleModal(false, elements.editTaskModal));
+  cancelEditBtn.addEventListener('click', function(){toggleModal(false, elements.editTaskModal)});
 
   // Cancel adding new task event listener
   const cancelAddTaskBtn = document.getElementById('cancel-add-task-btn');
@@ -158,8 +191,8 @@ function setupEventListeners() {
   });
 
   // Show sidebar event listener
-  elements.hideSideBarBtn.click() => toggleSidebar(false));
-  elements.showSideBarBtn.click() => toggleSidebar(true));
+  elements.hideSideBarBtn.addEventListener('click', function(){toggleSidebar(false)});
+  elements.showSideBarBtn.addEventListener('click', function(){toggleSidebar(true)});
 
   // Theme switch event listener
   elements.themeSwitch.addEventListener('change', toggleTheme);
@@ -179,7 +212,7 @@ function setupEventListeners() {
 // Toggles tasks modal
 // Task: Fix bugs
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? 'block' => 'none'; 
+  modal.style.display = show ? 'block' : 'none'; 
 }
 
 /*************************************************************************************************************************************************
