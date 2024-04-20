@@ -19,7 +19,7 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-  "side-bar": document.querySelector(".side-bar"),
+  "sidebar": document.querySelector(".side-bar"),
   "boards-nav-links-div": document.querySelector(".boards-nav-links-div"),
   "side-bar-bottom": document.querySelector(".side-bar-bottom"),
   "hide-side-bar-div": document.querySelector(".hide-side-bar-div"),
@@ -204,7 +204,7 @@ function setupEventListeners() {
   });
 
   // Add new task form submission event listener
-  elements.modalWindow.addEventListener('submit',  (event) => {
+  elements.modal-window.addEventListener('submit',  (event) => {
     addTask(event)
   });
 }
@@ -238,8 +238,9 @@ function addTask(event) {
 
 
 function toggleSidebar(show) {
- 
-}
+    elements.sidebar.style.display = show ? 'block' : 'none';
+  }
+
 
 function toggleTheme() {
  
