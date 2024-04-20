@@ -1,11 +1,10 @@
-// TASK: import helper functions from utils
-import taskFunctions from 'JSL_Portfolio_Piece_StudentNo_Classcode_Group_Name-Surname_JSL11-main\.utils\taskFunctions.js';
-// TASK: import initialData
-import initialData from 'JSL_Portfolio_Piece_StudentNo_Classcode_Group_Name-Surname_JSL11-main\initialData.js'
+
+alert('Hello')
 
 /*************************************************************************************************************************************************
  * FIX BUGS!!!
  * **********************************************************************************************************************************************/
+
 
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
@@ -19,39 +18,41 @@ function initializeData() {
 
 // TASK: Get elements from the DOM
 const elements = {
-  "sidebar": document.querySelector(".side-bar"),
-  "boards-nav-links-div": document.querySelector(".boards-nav-links-div"),
-  "side-bar-bottom": document.querySelector(".side-bar-bottom"),
-  "hide-side-bar-div": document.querySelector(".hide-side-bar-div"),
-  "sticky-header": document.querySelector(".sticky-header"),
-  "header-name-div": document.querySelector(".header-name-div"),
-  "header-board-name": document.querySelector(".header-board-name"),
-  "dropdownBtn": document.querySelector(".dropdownBtn"),
-  "icon-chevron-down": document.querySelector(".icon-chevron-down"),
-  "primary-btn": document.querySelector(".primary-btn"),
-  "edit-btn": document.querySelector(".edit-btn"),
-  "editBtnsDiv": document.querySelector(".editBtnsDiv"),
-  "editBtns": document.querySelector(".editBtns"),
-  "container": document.querySelector(".container"),
-  "card-column-main": document.querySelector(".card-column-main"),
-  "column-div": document.querySelectorAll(".column-div"),
-  "column-head-div": document.querySelectorAll(".column-head-div"),
-  "dot": document.querySelectorAll(".dot"),
-  "columnHeader": document.querySelectorAll(".columnHeader"),
-  "tasks-container": document.querySelectorAll(".tasks-container"),
-  "modal-window": document.querySelector(".modal-window"),
-  "modal-title": document.querySelector(".modal-title"),
-  "input-div": document.querySelectorAll(".input-div"),
-  "label-modal-window": document.querySelectorAll(".label-modal-window"),
-  "modal-input": document.querySelectorAll(".modal-input"),
-  "button-group": document.querySelectorAll(".button-group"),
-  "submit-btn": document.querySelectorAll(".submit-btn"),
-  "edit-task-modal-window": document.querySelector(".edit-task-modal-window"),
-  "edit-task-form": document.querySelector(".edit-task-form"),
-  "edit-task-div": document.querySelectorAll(".edit-task-div"),
-  "task-title-input": document.querySelectorAll(".task-title-input"),
-  "edit-btn": document.querySelectorAll(".edit-btn"),
+  showSideBarBtn: document.querySelector('show-side-bar-btn'),
+  sidebar: document.querySelector('.side-bar'),
+  boardsnavlinksdiv: document.querySelector('.boards-nav-links-div'),
+  sidebarbottom: document.querySelector('.side-bar-bottom'),
+  hidesidebardiv: document.querySelector('.hide-side-bar-div'),
+  stickyheader: document.querySelector('.sticky-header'),
+  headernamediv: document.querySelector('.header-name-div'),
+  headerboard: document.querySelector('.header-board-name'),
+  dropdownBtn: document.querySelector('.dropdownBtn'),
+  iconchevrondown: document.querySelector('.icon-chevron-down'),
+  primarybtn: document.querySelector('.primary-btn'),
+  editbtn: document.querySelector('.edit-btn'),
+  editBtnsDiv: document.querySelector('.editBtnsDiv'),
+  editBtns: document.querySelector('.editBtns'),
+  container: document.querySelector('.container'),
+  cardcolumnmain: document.querySelector('.card-column-main'),
+  columnDiv: document.querySelectorAll('.column-div'),
+  columnheaddiv: document.querySelectorAll('.column-head-div'),
+  dot: document.querySelectorAll('.dot'),
+  columnHeader: document.querySelectorAll('.columnHeader'),
+  taskscontainer: document.querySelectorAll('.tasks-container'),
+  modalWindow: document.querySelector('.modal-window'),
+  modaltitle: document.querySelector('.modal-title'),
+  inputdiv: document.querySelectorAll('.input-div'),
+  labelmodalwindow: document.querySelectorAll('.label-modal-window'),
+  modalinput: document.querySelectorAll('.modal-input'),
+  buttongroup: document.querySelectorAll('.button-group'),
+  submitbtn: document.querySelectorAll('.submit-btn'),
+  edittaskmodalwindow: document.querySelector('.edit-task-modal-window'),
+  edittaskform: document.querySelector('.edit-task-form'),
+  edittaskdiv: document.querySelectorAll('.edit-task-div'),
+  tasktitleinput: document.querySelectorAll('.task-title-input'),
+  editbtn: document.querySelectorAll('.edit-btn'),
 };
+
 
 
 let activeBoard = ""
@@ -65,7 +66,7 @@ function fetchAndDisplayBoardsAndTasks() {
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
     activeBoard = localStorageBoard ? localStorageBoard :  boards[0]; 
-    elements.headerBoardName.textContent = activeBoard
+    elements.headerboard.textContent = activeBoard
     styleActiveBoard(activeBoard)
     refreshTasksUI();
   }
@@ -81,7 +82,7 @@ function displayBoards(boards) {
     boardElement.textContent = board;
     boardElement.classList.add("board-btn");
     boardElement.addEventListener('click', function()  { 
-      elements.headerBoardName.textContent = board;
+      elements.headerboard.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board //assigns active board
       localStorage.setItem("activeBoard", JSON.stringify(activeBoard))
@@ -100,7 +101,7 @@ function filterAndDisplayTasksByBoard(boardName) {
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
 
-  elements.columnDivs.forEach(column => {
+  elements.columnDiv.forEach(column => {
     const status = column.getAttribute("data-status");
     // Reset column content while preserving the column title
     column.innerHTML = `<div class="column-head-div">
@@ -119,7 +120,7 @@ function filterAndDisplayTasksByBoard(boardName) {
     }),
       // Listen for a click event on each task and open a modal
       taskElement.addEventListener('click', function() { 
-        openEditTaskModal(task);
+        openEditTaskModal(tasks);
       }),
 
       tasksContainer.appendChild(taskElement);
@@ -220,21 +221,25 @@ function toggleModal(show, modal = elements.modalWindow) {
  * **********************************************************************************************************************************************/
 
 function addTask(event) {
+  const addNewTaskButton = document.getElementById('add-new-task-btn');
   event.preventDefault(); 
 
   //Assign user input to the task object
-    const task = {
-      
-    };
-    const newTask = createNewTask(task);
-    if (newTask) {
-      addTaskToUI(newTask);
-      toggleModal(false);
-      elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
-      event.target.reset();
-      refreshTasksUI();
-    }
+  const task = {
+    // Populate task properties here based on user input
+  };
+  
+  const newTask = createNewTask(task);
+  
+  if (newTask) {
+    addTaskToUI(newTask);
+    toggleModal(true);
+    elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
+    event.target.reset();
+    refreshTasksUI();
+  }
 }
+
 
 
 function toggleSidebar(show) {
@@ -285,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
   init(); // init is called after the DOM is fully loaded
 });
 
+
 function init() {
   setupEventListeners();
   const showSidebar = localStorage.getItem('showSideBar') === 'true';
@@ -293,3 +299,4 @@ function init() {
   document.body.classList.toggle('light-theme', isLightTheme);
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
 }
+

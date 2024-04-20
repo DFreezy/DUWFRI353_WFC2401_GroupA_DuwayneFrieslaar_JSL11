@@ -51,7 +51,7 @@
                     <img src="./assets/icon-chevron-down.svg" alt="icon-chevron-down" class="icon-chevron-down" id="dropDownIcon">
                 </button>
             </div>
-            <button id="add-new-task-btn" class="primary-btn">+ Add New Task</button>
+            <button id="add-new-task-btn" class="primary-btn" onclick="addTask()">+ Add New Task</button>
             <button class="edit-btn" id="edit-board-btn">
                 <p id="three-dots-icon">&#8942;</p>
             </button>
@@ -113,7 +113,7 @@
             </select>
         </div>
         <div class="button-group">
-            <button type="submit" class="submit-btn" id="create-task-btn">Create Task</button>
+            <button id="add-new-task-btn" class="primary-btn">+ Add New Task</button>
             <button type="button" class="submit-btn" id="cancel-add-task-btn">Cancel</button>
         </div>
     </form>
@@ -143,7 +143,6 @@
             </div>
         </form>
     </div>
-
 
     <div id="filterDiv"></div>
 
