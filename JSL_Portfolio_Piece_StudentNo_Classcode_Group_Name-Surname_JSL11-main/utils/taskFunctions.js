@@ -20,6 +20,7 @@ export const createNewTask = (task) => {
 };
 
 
+
 export const patchTask = (id, updates) => {
   const tasks = getTasks();
   const taskIndex = tasks.findIndex(task => task.id === id);

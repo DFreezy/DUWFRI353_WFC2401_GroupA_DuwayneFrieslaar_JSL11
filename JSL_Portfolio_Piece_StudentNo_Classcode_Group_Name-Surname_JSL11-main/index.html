@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./index.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.svg">
     <title>Agile Board Task Management</title>
+    <script type="module" src="./index.js" defer></script>
 </head>
 
 <body>
@@ -37,6 +38,10 @@
             </div>
         </div>
     </nav>
+<!----nav ends-->
+
+
+
     <button id="show-side-bar-btn">
         <img src="./assets/icon-show-sidebar.svg" alt="icon-show-sidebar">
     </button>
@@ -51,7 +56,7 @@
                     <img src="./assets/icon-chevron-down.svg" alt="icon-chevron-down" class="icon-chevron-down" id="dropDownIcon">
                 </button>
             </div>
-            <button id="add-new-task-btn" class="primary-btn" onclick="addTask()">+ Add New Task</button>
+            <button id="add-new-task-btn" class="primary-btn">+ Add New Task</button> <!---adafasbharstn-->
             <button class="edit-btn" id="edit-board-btn">
                 <p id="three-dots-icon">&#8942;</p>
             </button>
@@ -146,8 +151,9 @@
 
     <div id="filterDiv"></div>
 
+    
     <!-- JavaScript Import -->
-    <script type="module" src="./index.js"></script>
+  
 </body>
 
 </html>
