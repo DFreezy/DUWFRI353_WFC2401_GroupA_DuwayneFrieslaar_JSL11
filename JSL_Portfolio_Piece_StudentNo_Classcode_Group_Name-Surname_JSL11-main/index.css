@@ -882,7 +882,7 @@ input:checked + #label-checkbox-theme:after {
   }
 
   #side-logo-div {
-    display: none;
+    display: block;
   }
 
   .side-bar-bottom {
