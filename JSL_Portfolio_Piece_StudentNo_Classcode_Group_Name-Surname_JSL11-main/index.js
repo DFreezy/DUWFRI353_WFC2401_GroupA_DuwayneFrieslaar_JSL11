@@ -29,36 +29,18 @@ initializeData();
 const elements = {
   // Navigation Sidebar elements
   sideModal: document.querySelector(".side-bar"),
-  ToDoLogo: document.getElementById("logo"),
   boardsLinks: document.getElementById("boards-nav-links-div"),
-  themeIcon: document.getElementById("icon-dark"),
   themeChanger: document.getElementById("switch"),
-  lightIcon: document.getElementById("icon-light"),
   hideSideBarBtn: document.getElementById("hide-side-bar-btn"),
   showSideBarBtn: document.getElementById("show-side-bar-btn"),
   headerBoardName: document.getElementById("header-board-name"),
-  addNewTaskBtn: document.getElementById("add-new-task-btn"),
-  editBoardBtn: document.getElementById("edit-board-btn"),
   columnDivs: document.querySelectorAll(".column-div"),
-  todoColumn: document.querySelector('.column-div[data-status="todo"]'),
-  doingColumn: document.querySelector('.column-div[data-status="doing"]'),
-  doneColumn: document.querySelector('.column-div[data-status="done"]'),
   filterDiv: document.getElementById("filterDiv"),
-  titleInput: document.getElementById("title-input"),
-  descInput: document.getElementById("desc-input"),
-  selectStatus: document.getElementById("select-status"),
   createNewTaskBtn: document.getElementById("add-new-task-btn"),
-  cancelAddTaskBtn: document.getElementById("cancel-add-task-btn"),
-  newTaskModal: document.getElementById("new-task-modal-window"),
   modalWindow: document.getElementById("new-task-modal-window"),
   editTaskModal: document.querySelector(".edit-task-modal-window"),
-  editTaskTitleInput: document.getElementById("edit-task-title-input"),
-  editTaskDescInput: document.getElementById("edit-task-desc-input"),
-  editStatus: document.getElementById("edit-select-status"),
-  saveTaskChangesBtn: document.getElementById("save-task-changes-btn"),
   cancelEditBtn: document.getElementById("cancel-edit-btn"),
   deleteTaskBtn: document.getElementById("delete-task-btn"),
-  filterDiv: document.getElementById("filterDiv"),
 };
 
 let activeBoard = "";
@@ -178,7 +160,7 @@ function addTaskToUI(task) {
   taskElement.textContent = task.title; // Modify as needed
   taskElement.setAttribute("data-task-id", task.id);
 
-  tasksContainer.appendChild();
+  tasksContainer.appendChild(taskElement);
 }
 ///////////////////////////////////////////////////SETUPEVENTLISTENER\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function setupEventListeners() {
