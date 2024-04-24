@@ -189,6 +189,7 @@ function setupEventListeners() {
 
   // Theme switch event listener
   elements.themeChanger.addEventListener("change", toggleTheme);
+ 
 
   // Show Add New Task Modal event listener
   elements.createNewTaskBtn.addEventListener("click", () => {
@@ -251,7 +252,7 @@ function toggleSidebar(show) {
   }
 }
 toggleSidebar(true);
-
+//////////////////////////////////////////////TOGGLETHEMEFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function toggleTheme() {
   // Get a reference to the document body
   const body = document.body;
@@ -299,27 +300,49 @@ function openEditTaskModal(task) {
 
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
-
+///////////////////////////////////////////////////SAVETASKCHANGES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+// Function to save changes to a task
 function saveTaskChanges(taskId) {
   // Get new user inputs
-  const titleInput = document.getElementById("edit-task-title-input");
-  const descInput = document.getElementById("edit-task-desc-input");
-  const statusSelect = document.getElementById("edit-select-status");
+  const updatedTitle = document.getElementById("edit-task-title-input").value;
+  const updatedDescription = document.getElementById("edit-task-desc-input").value;
+  const updatedStatus = document.getElementById("edit-select-status").value;
 
-  // Create an object with the updated task details
-  const updatedTask = {
-    id: taskId,
-    title: titleInput.value,
-    description: descInput.value,
-    status: statusSelect.value,
-  };
+  // Get the tasks from local storage
+  let tasks = getTasks();
 
-  // Update task using a hlper functoin
-  patchTask(taskId, updatedTask);
+  // Check if a task with the same ID already exists
+  const existingTaskIndex = tasks.findIndex(task => task.id === taskId);
 
-  // Close the modal and refresh the UI to reflect the changes
-  toggleModal(false, elements.editTaskModal);
+  if (existingTaskIndex !== -1) {
+    // If the task already exists, update its properties
+    tasks[existingTaskIndex].title = updatedTitle;
+    tasks[existingTaskIndex].description = updatedDescription;
+    tasks[existingTaskIndex].status = updatedStatus;
+  } else {
+    // If the task doesn't exist, create a new task object
+    const newTask = {
+      id: taskId,
+      title: updatedTitle,
+      description: updatedDescription,
+      status: updatedStatus
+    };
+
+    // Add the new task to the tasks array
+    tasks.push(newTask);
+  }
+
+  // Save the updated tasks array back to local storage
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  // Call putTask to update the task in your storage mechanism
+  putTask(taskId, tasks[existingTaskIndex]);
+
+  // Refresh the UI to reflect the changes
   refreshTasksUI();
+
+  // Close the modal
+  toggleModal(false, elements.editTaskModal);
 }
 
 /*************************************************************************************************************************************************/
