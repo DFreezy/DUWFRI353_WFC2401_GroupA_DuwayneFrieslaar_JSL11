@@ -61,7 +61,7 @@ function fetchAndDisplayBoardsAndTasks() {
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
     activeBoard = localStorageBoard ? localStorageBoard :  boards[0]; 
-    elements.headerBoardName.textContent = activeBoard
+    elements.headerBoardName.innerHTML = activeBoard
     styleActiveBoard(activeBoard)
     refreshTasksUI();
   }
@@ -78,7 +78,7 @@ function displayBoards(boards) {
     boardElement.classList.add("board-btn");
     boardElement.addEventListener("click", () => {
       // Corrected click event listener syntax
-      elements.headerBoardName.textContent = board;
+      headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board; // Corrected assignment syntax
       localStorage.setItem("activeBoard", JSON.stringify(activeBoard));
@@ -263,11 +263,9 @@ function toggleSidebar(show) {
   if (show) {
     sidebar.style.display = "block";
     elements.showSideBarBtn.style.display = "none";
-    elements.headerBoardName.style.display = "block";
   } else {
     sidebar.style.display = "none";
     elements.showSideBarBtn.style.display = "block";
-    elements.headerBoardName.style.display = "none";
   }
 }
 
