@@ -38,7 +38,7 @@ const elements = {
   hideSideBarBtn: document.querySelector('#hide-side-bar-btn'),
   filterDiv: document.querySelectorAll('#filterDiv'),
   columnDivs: document.querySelectorAll('.card-column-main'), // Use querySelectorAll to select multiple elements
-  headerBoardName: document.querySelector('#boards-nav-links-div'),
+  boardsContainer: document.querySelector('#boards-nav-links-div'),
  toggleDiv:document.querySelectorAll('.toggle-div'),
  headineSidePanel: document.getElementById('headline-sidepanel')
 };
@@ -61,7 +61,7 @@ function fetchAndDisplayBoardsAndTasks() {
   if (boards.length > 0) {
     const localStorageBoard = JSON.parse(localStorage.getItem("activeBoard"))
     activeBoard = localStorageBoard ? localStorageBoard :  boards[0]; 
-    elements.headerBoardName.innerHTML = activeBoard
+    boardsContainer.innerHTML = activeBoard
     styleActiveBoard(activeBoard)
     refreshTasksUI();
   }
@@ -78,7 +78,7 @@ function displayBoards(boards) {
     boardElement.classList.add("board-btn");
     boardElement.addEventListener("click", () => {
       // Corrected click event listener syntax
-      headerBoardName.textContent = board;
+      boardsContainer.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board; // Corrected assignment syntax
       localStorage.setItem("activeBoard", JSON.stringify(activeBoard));
@@ -136,9 +136,9 @@ function refreshTasksUI() {
 
 // Styles the active board by adding an active class
 // TASK: Fix Bugs
-function styleActiveBoard(headerBoardName) { 
+function styleActiveBoard(activeBoard) { 
     document.querySelectorAll('#edit-board-btn').forEach(btn => { 
-      if(btn.textContent === headerBoardName) {
+      if(btn.textContent === activeBoard) {
         btn.classList.add('active'); // Use classList.add to add a class
       } else {
         btn.classList.remove('active'); // Use classList.remove to remove a class
