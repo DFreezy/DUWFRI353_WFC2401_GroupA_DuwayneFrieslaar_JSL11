@@ -13,7 +13,7 @@ import { initialData } from "./initialData.js";
 /*************************************************************************************************************************************************
  * FIX BUGS!!!
  * **********************************************************************************************************************************************/
-// localStorage.clear();
+//localStorage.clear();
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
   if (!localStorage.getItem("tasks")) {
@@ -229,14 +229,10 @@ function addTask(event) {
     addTaskToUI(newTask);
     toggleModal(false);
     newTask.board = activeBoard;
-  
+    initialData.push(newTask);
     elements.filterDiv.style.display = "none"; // Also hide the filter overlay
     event.target.reset();
-  
- 
-    initialData.push(newTask);
     localStorage.setItem('tasks',JSON.stringify(initialData))
-    putTask(newTask);
     refreshTasksUI();
   }
 }
