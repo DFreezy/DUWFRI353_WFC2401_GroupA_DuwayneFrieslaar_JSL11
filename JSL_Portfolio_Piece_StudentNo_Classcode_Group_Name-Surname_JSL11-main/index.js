@@ -231,7 +231,6 @@ function addTask(event) {
     newTask.board = activeBoard;
     initialData.push(newTask);
     elements.filterDiv.style.display = "none"; // Also hide the filter overlay
-    event.target.reset();
     localStorage.setItem('tasks',JSON.stringify(initialData))
     refreshTasksUI();
   }
