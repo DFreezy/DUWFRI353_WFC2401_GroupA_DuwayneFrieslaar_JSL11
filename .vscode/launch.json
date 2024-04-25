@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open index.html",
+            "file": "c:\\Users\\suppo\\OneDrive\\Documents\\DUWFRI353_WFC2401_GroupA_DuwayneFrieslaar_JSL11\\JSL_Portfolio_Piece_StudentNo_Classcode_Group_Name-Surname_JSL11-main\\index.html"
+        }
+    ]
+}

@@ -1,5 +1,5 @@
-// TASK: import helper functions from utils
-// TASK: import initialData
+//✅ import helper functions from utils
+//✅ import initialData
 
 import {
   getTasks,
@@ -11,9 +11,9 @@ import {
 import { initialData } from "./initialData.js";
 
 /*************************************************************************************************************************************************
- * FIX BUGS!!!
+ * FIXED BUGS ✅
  * **********************************************************************************************************************************************/
-//localStorage.clear();
+
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
   if (!localStorage.getItem("tasks")) {
@@ -25,7 +25,7 @@ function initializeData() {
 }
 initializeData();
 
-// TASK: Get elements from the DOM
+//✅ Get elements from the DOM
 const elements = {
   // Navigation Sidebar elements
   sideModal: document.querySelector(".side-bar"),
@@ -46,7 +46,8 @@ const elements = {
 let activeBoard = "";
 
 // Extracts unique board names from tasks
-// TASK: FIX BUGS
+//✅ FIX BUGS
+//////////////////////////////////////////////////////FETCH&DISPLAYBOARDSANDTASKSFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function fetchAndDisplayBoardsAndTasks() {
   const tasks = getTasks();
   const boards = [...new Set(tasks.map((task) => task.board).filter(Boolean))];
@@ -61,7 +62,8 @@ function fetchAndDisplayBoardsAndTasks() {
 }
 
 // Creates different boards in the DOM
-// TASK: Fix Bugs
+//✅ Fix Bugs
+///////////////////////////////////////////////////DISPLAYBOARDSFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function displayBoards(boards) {
   const boardsLink = document.getElementById("boards-nav-links-div");
   boardsLink.innerHTML = ""; // Clears the container
@@ -82,7 +84,8 @@ function displayBoards(boards) {
 }
 
 // Filters tasks corresponding to the board name and displays them on the DOM.
-// TASK: Fix Bugs
+//✅ Fix Bugs
+////////////////////////////////////////////////FILTERANDDISPLAYTASKSBYBOARDFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function filterAndDisplayTasksByBoard(boardName) {
   const tasks = getTasks(); // Fetch tasks from a simulated local storage function
   const filteredTasks = tasks.filter((task) => task.board === boardName); // Use strict equality operator '===' instead of assignment '='
@@ -119,13 +122,13 @@ function filterAndDisplayTasksByBoard(boardName) {
       });
   });
 }
-
+///////////////////////////////////////////////REFRESHTASKUIFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function refreshTasksUI() {
   filterAndDisplayTasksByBoard(activeBoard);
 }
 
 // Styles the active board by adding an active class
-// TASK: Fix Bugs
+//✅ Fix Bugs
 function styleActiveBoard(boardName) {
   document.querySelectorAll(".board-btn").forEach((btn) => {
     if (btn.textContent === boardName) {
@@ -135,7 +138,7 @@ function styleActiveBoard(boardName) {
     }
   });
 }
-
+///////////////////////////////////////////////////ADDTASKTOUI\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function addTaskToUI(task) {
   const column = document.querySelector(
     '.column-div[data-status="${task.status}"]'
@@ -204,20 +207,20 @@ function setupEventListeners() {
 }
 
 // Toggles tasks modal
-// Task: Fix bugs
+//✅ Fix bugs
 ///////////////////////////////////////////TOGGLEMODALFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? "block" : "none"; // Fixed ternary operator syntax
+  modal.style.display = show ? "block" : "none"; // ✅Fixed ternary operator syntax
 }
 
 /*************************************************************************************************************************************************
- * COMPLETE FUNCTION CODE
+ *✅ COMPLETE FUNCTION CODE
  * **********************************************************************************************************************************************/
 ////////////////////////////////////////////////ADDTASKFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function addTask(event) {
   event.preventDefault();
 
-  // Assign user input to the task object
+  //✅ Assign user input to the task object
   const task = {
     title: document.getElementById("title-input").value,
     description: document.getElementById("desc-input").value,
@@ -262,7 +265,7 @@ function toggleTheme() {
   // Store the theme preference in local storage
   localStorage.setItem("theme", isLightTheme ? "light" : "dark");
 }
-
+////////////////////////////////////////////////////OPENEDITTASKMODALFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function openEditTaskModal(task) {
   // Set task details in modal inputs
   const titleInput = document.getElementById("edit-task-title-input");
@@ -307,13 +310,13 @@ function saveTaskChanges(taskId) {
   let tasks = getTasks();
 
   // Check if a task with the same ID already exists
-  const existingTaskIndex = tasks.findIndex(task => task.id === taskId);
+  const existingTask = tasks.findIndex(task => task.id === taskId);
 
-  if (existingTaskIndex !== -1) {
+  if (existingTask !== -1) {
     // If the task already exists, update its properties
-    tasks[existingTaskIndex].title = updatedTitle;
-    tasks[existingTaskIndex].description = updatedDescription;
-    tasks[existingTaskIndex].status = updatedStatus;
+    tasks[existingTask].title = updatedTitle;
+    tasks[existingTask].description = updatedDescription;
+    tasks[existingTask].status = updatedStatus;
   } else {
     // If the task doesn't exist, create a new task object
     const newTask = {
@@ -331,7 +334,7 @@ function saveTaskChanges(taskId) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 
   // Call putTask to update the task in your storage mechanism
-  putTask(taskId, tasks[existingTaskIndex]);
+  putTask(taskId, tasks[existingTask]);
 
   // Refresh the UI to reflect the changes
   refreshTasksUI();
@@ -345,7 +348,7 @@ function saveTaskChanges(taskId) {
 document.addEventListener("DOMContentLoaded", function () {
   init(); // init is called after the DOM is fully loaded
 });
-
+////////////////////////////////////////////////////////////INITFUNCTION\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function init() {
   setupEventListeners();
   const showSidebar = localStorage.getItem("showSideBar") === "true";
